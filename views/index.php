@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var $url \Justly\UrlEntity
+ * @var $errorMsg string
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,11 +14,16 @@
     <title>Justly: a really simple URL shortener</title>
 </head>
 <body>
-    <h1>Justly - A really simple URL shortener</h1>
-    <form action="/index.php" method="post">
-        <label for="url">URL</label>
-        <input type="text" name="url" id="url">
-        <input type="submit" name="shorten" id="shorten" value="shorten">
-    </form>
+<h1>Justly - A really simple URL shortener</h1>
+<form action="/index.php" method="post">
+
+    <?php if ($errorMsg ?? false): ?>
+        <div class="errors"><?= htmlentities($errorMsg) ?></div>
+    <?php endif; ?>
+
+    <label for="url">URL</label>
+    <input type="text" name="url" id="url" value="<?= isset($url) ? htmlentities($url->getTargetUrl()) : '' ?>">
+    <input type="submit" name="shorten" id="shorten" value="shorten">
+</form>
 </body>
 </html>

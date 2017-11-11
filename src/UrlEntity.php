@@ -75,4 +75,19 @@ class UrlEntity
         return $this->shortenedUrl;
     }
 
+    public function isValid()
+    {
+        $validUrl = filter_var($this->targetUrl, FILTER_VALIDATE_URL);
+
+        if ($validUrl !== false) {
+            $protocol = parse_url($validUrl, PHP_URL_SCHEME);
+            if ($protocol == 'http' || $protocol == 'https') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }
