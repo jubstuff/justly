@@ -1,5 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+use Justly\DatabaseService;
 
-const CONFIG_VIEWS_DIR = __DIR__ . '/../views';
+require_once __DIR__.'/../vendor/autoload.php';
+
+const CONFIG_VIEWS_DIR = __DIR__.'/../views';
+
+DatabaseService::setDefaultPdoParameters([
+    'sqlite:'.__DIR__.'/../data/justly.sqlite',
+]);
