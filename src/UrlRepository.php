@@ -76,4 +76,12 @@ class UrlRepository
         return $urls;
     }
 
+    public function incrementRedirects(UrlEntity $url)
+    {
+        $sql = 'UPDATE urls SET redirects = redirects + 1 WHERE shortenedUrl = :shortenedUrl';
+        $stm = $this->pdo->prepare($sql);
+
+        $stm->execute(['shortenedUrl' => $url->getShortenedUrl()]);
+    }
+
 }

@@ -16,6 +16,11 @@ class UrlEntity
     private $shortenedUrl;
 
     /**
+     * @var int
+     */
+    private $redirectCount;
+
+    /**
      * UrlEntity constructor.
      *
      * @param string $targetUrl
@@ -24,7 +29,13 @@ class UrlEntity
     public function __construct($targetUrl, $shortenedUrl = null)
     {
         $this->targetUrl = $targetUrl;
-        $this->shortenedUrl = $this->generateRandomToken();
+        $this->redirectCount = 0;
+        if (empty($shortenedUrl)) {
+            $this->shortenedUrl = $this->generateRandomToken();
+        } else {
+            $this->shortenedUrl = $shortenedUrl;
+        }
+
     }
 
     /**
@@ -38,6 +49,7 @@ class UrlEntity
     public static function createFromArray($row)
     {
         $url = new UrlEntity($row['targetUrl'], $row['shortenedUrl']);
+        $url->redirectCount = $row['redirects'];
 
         return $url;
     }
@@ -73,6 +85,11 @@ class UrlEntity
     public function getShortenedUrl(): string
     {
         return $this->shortenedUrl;
+    }
+
+    public function getRedirectCount(): int
+    {
+        return $this->redirectCount;
     }
 
     public function isValid()

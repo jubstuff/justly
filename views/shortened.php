@@ -15,6 +15,7 @@
 <body>
 <h1>Justly - <?=htmlentities($url->getShortenedUrl()) ?></h1>
 <p>This url redirects to <?=htmlentities($url->getTargetUrl())?></p>
+<p>It has been redirected <strong><?=htmlentities($url->getRedirectCount()) ?> times.</strong></p>
 <h2>Create another URL:</h2>
 <form action="/index.php" method="post">
     <label for="url">URL</label>
