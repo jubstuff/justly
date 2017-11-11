@@ -1,0 +1,14 @@
+{
+    "name": "jubstuff/justly",
+    "description": "A really simple URL shortener",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Giustino Borzacchiello",
+            "email": "giustinob@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
