@@ -98,7 +98,7 @@ class UrlEntity
 
         if ($validUrl !== false) {
             $protocol = parse_url($validUrl, PHP_URL_SCHEME);
-            if ($protocol == 'http' || $protocol == 'https') {
+            if ($protocol === 'http' || $protocol === 'https') {
                 return true;
             }
         }
