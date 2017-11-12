@@ -4,6 +4,6 @@ use Justly\UrlController;
 
 require __DIR__ . '/../src/bootstrap.php';
 
-$controller = new UrlController();
+$controller = UrlController::create();
 
 $controller->getShortenedUrl();

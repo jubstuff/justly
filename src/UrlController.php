@@ -6,10 +6,35 @@ namespace Justly;
 
 class UrlController
 {
+    /**
+     * @var UrlRepository
+     */
+    private $urlRepository;
+
+    /**
+     * Creates a new controller given a repository.
+     *
+     * @param UrlRepository $urlRepository
+     */
+    public function __construct(UrlRepository $urlRepository)
+    {
+        $this->urlRepository = $urlRepository;
+    }
+
+    /**
+     * Named constructor. Use this to return standard controller.
+     *
+     * @return UrlController
+     */
+    public static function create()
+    {
+        return new self(new UrlRepository());
+    }
+
     public function getIndex()
     {
-        $urlRepository = new UrlRepository();
-        $mostRecentUrls = $urlRepository->getLatesUrls(10);
+        $urlRepository = $this->urlRepository;
+        $mostRecentUrls = $urlRepository->getLatestUrls(10);
         include CONFIG_VIEWS_DIR.'/index.php';
     }
 
@@ -20,7 +45,7 @@ class UrlController
      */
     public function redirectUrl($shortenedUrl)
     {
-        $urlRepository = new UrlRepository();
+        $urlRepository = $this->urlRepository;
         $url = $urlRepository->getUrl($shortenedUrl);
 
         if ($url instanceof UrlEntity && $url->isValid()) {
@@ -44,7 +69,7 @@ class UrlController
 
         if ($url->isValid()) {
 
-            $urlRepository = new UrlRepository();
+            $urlRepository = $this->urlRepository;
             $urlRepository->addUrl($url);
 
             $shortenedUrl = urlencode($url->getShortenedUrl());
@@ -61,7 +86,7 @@ class UrlController
     {
         session_start();
 
-        $urlRepository = new UrlRepository();
+        $urlRepository = $this->urlRepository;
         $url = $urlRepository->getUrl($_GET['url']);
 
         if ($url instanceof UrlEntity && $url->isValid()) {

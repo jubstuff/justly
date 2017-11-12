@@ -62,7 +62,7 @@ class UrlRepository
      *
      * @return array
      */
-    public function getLatesUrls($maximumNumber)
+    public function getLatestUrls($maximumNumber)
     {
         $sql = 'SELECT * FROM urls ORDER BY timestamp DESC LIMIT :limit';
         $stm = $this->pdo->prepare($sql);

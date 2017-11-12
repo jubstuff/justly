@@ -1,8 +1,10 @@
 <?php
 
+use Justly\UrlController;
+
 require_once __DIR__.'/../src/bootstrap.php';
 
-$controller = new \Justly\UrlController();
+$controller = UrlController::create();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
